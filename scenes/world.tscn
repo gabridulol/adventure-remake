@@ -5,8 +5,8 @@
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
 [ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bbatqrl7neus" path="res://scenes/color_zone.tscn" id="5_71j4m"]
-[ext_resource type="PackedScene" uid="uid://6r664soyogm1" path="res://scenes/morcego.tscn" id="6_i7141"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
 size = Vector2(292, 386)
@@ -118,8 +118,8 @@ shape = SubResource("RectangleShape2D_q5onr")
 position = Vector2(-672, 77)
 shape = SubResource("RectangleShape2D_q5onr")
 
-[node name="DetectionArea" parent="." instance=ExtResource("6_i7141")]
-position = Vector2(325, 9)
+[node name="Bat" parent="." instance=ExtResource("10_w7kh3")]
+position = Vector2(302, 37)
 
 [node name="key" parent="." instance=ExtResource("3_qfnet")]
 position = Vector2(257, -8)

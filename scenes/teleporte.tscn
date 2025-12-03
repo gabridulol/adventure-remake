@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnsrksevs56vw"]
+
+[ext_resource type="Script" uid="uid://crq7hrn28nxaj" path="res://teleporte.gd" id="1_hvcy4"]
+
+[node name="TeleportZone" type="Area2D"]
+script = ExtResource("1_hvcy4")
