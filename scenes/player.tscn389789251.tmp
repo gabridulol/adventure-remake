@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmqmmiyf4cc14"]
+[gd_scene load_steps=29 format=3 uid="uid://cmqmmiyf4cc14"]
 
 [ext_resource type="Script" uid="uid://cqkpdh8k2fs0f" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://bcbxw0i18rnd6" path="res://assets/player/WhatsApp Image 2025-12-02 at 21.48.40 (1).jpeg" id="45_g5jhy"]
@@ -257,35 +257,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(14, 18)
-
-[sub_resource type="Curve" id="Curve_g2els"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_g2els"]
-resource_local_to_scene = true
-curve = SubResource("Curve_g2els")
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_4flbx")
+speed = null
+rotation_speed_deg = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g2els")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"idle_0"
-frame_progress = 0.12981153
+animation = &"walk_7"
+frame_progress = 0.306934
 
 [node name="ItemPivot" type="Node2D" parent="."]
 
 [node name="PickupArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_g2els")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 2.0
-shadow_enabled = true
-texture = SubResource("CurveTexture_g2els")
