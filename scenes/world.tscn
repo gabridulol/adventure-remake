@@ -11,7 +11,11 @@
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Itens" parent="." instance=ExtResource("2_4wyf3")]
-position = Vector2(551, 154)
+position = Vector2(490, 191)
+
+[node name="Itens2" parent="." instance=ExtResource("2_4wyf3")]
+position = Vector2(140, 184)
 
 [node name="Bat" parent="." instance=ExtResource("3_k0juu")]
-position = Vector2(270, 199)
+position = Vector2(313, 188)
+speed = 400.0
