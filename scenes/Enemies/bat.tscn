@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2od1xrvqxs4o"]
 
 [ext_resource type="Script" uid="uid://clncwmbkqmuve" path="res://scenes/Enemies/bat.gd" id="1_n531f"]
-[ext_resource type="Texture2D" uid="uid://b6yvvqr5o1wii" path="res://assets/player/player.png" id="2_n531f"]
+[ext_resource type="Texture2D" uid="uid://buje32rbwstvn" path="res://assets/player/player.png" id="2_n531f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v1j6a"]
 radius = 75.43209
