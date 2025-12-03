@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://e2ht1tv02bll"]
+
+[ext_resource type="Script" uid="uid://dqjqorrr0wn8d" path="res://scripts/dragon.gd" id="1_vfigm"]
+[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_5q8uj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q8uj"]
+radius = 232.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfigm"]
+radius = 16.0
+
+[node name="Dragon" type="CharacterBody2D"]
+script = ExtResource("1_vfigm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="VisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_5q8uj")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_vfigm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5q8uj")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
