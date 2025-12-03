@@ -22,10 +22,34 @@ const DIR_ANGLES_DEG: Array[float] = [
 	-135.0  # up-left
 ]
 
+# ------- PALETAS DE COR -------
+# 0 = normal (sem prefixo)
+# 1..6 = suas outras cores (ajusta os nomes se quiser)
+const PALETTE_PREFIXES: Array[String] = [
+	"",      # 0 – normal
+	"p1_",   # 1 – paleta 1
+	"p2_",   # 2 – paleta 2
+	"p3_",   # 3 – paleta 3
+	"p4_",   # 4 – paleta 4
+	"p5_",   # 5 – paleta 5
+	"p6_",   # 6 – paleta 6
+]
+
+var current_palette: int = 0
 var carried_item: Node2D = null
 var facing_dir_index: int = 0  # última direção de movimento (0..7)
 
 
+# =========================
+#   PALETA / COR
+# =========================
+func set_palette(palette_index: int) -> void:
+	current_palette = clamp(palette_index, 0, PALETTE_PREFIXES.size() - 1)
+
+
+# =========================
+#   LOOP FÍSICO
+# =========================
 func _physics_process(delta: float) -> void:
 	var input_dir: Vector2 = _get_input_dir()
 	var is_moving: bool = input_dir.length() > 0.0
@@ -51,6 +75,7 @@ func _physics_process(delta: float) -> void:
 		_update_item_rotation(delta)
 
 
+# Direção vinda do teclado
 func _get_input_dir() -> Vector2:
 	var dir: Vector2 = Vector2.ZERO
 
@@ -66,6 +91,7 @@ func _get_input_dir() -> Vector2:
 	return dir
 
 
+# Rotação do item na mão baseada no mouse
 func _update_item_rotation(delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var target_angle: float = (mouse_pos - global_position).angle()
@@ -77,6 +103,7 @@ func _update_item_rotation(delta: float) -> void:
 	item_pivot.rotation += step
 
 
+# Converte ângulo em um índice de 0..7
 func _dir_index_from_angle(angle_rad: float) -> int:
 	var angle_deg: float = rad_to_deg(angle_rad)
 	var best_idx: int = 0
@@ -91,21 +118,24 @@ func _dir_index_from_angle(angle_rad: float) -> int:
 	return best_idx
 
 
+# Escolhe animação considerando direção + paleta atual
 func _set_animation(dir_idx: int, moving: bool) -> void:
-	var anim_name: String
+	var base_name: String
 	if moving:
-		anim_name = "walk_" + str(dir_idx)
+		base_name = "walk_" + str(dir_idx)
 	else:
-		anim_name = "idle_" + str(dir_idx)
+		base_name = "idle_" + str(dir_idx)
+
+	var prefix: String = PALETTE_PREFIXES[current_palette]
+	var anim_name: String = prefix + base_name
 
 	if sprite.animation != anim_name:
 		sprite.play(anim_name)
 
 
-# -----------------------------
-# Pickup / Drop de itens
-# -----------------------------
-
+# =========================
+#   PICKUP / DROP DE ITENS
+# =========================
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if carried_item != null:
@@ -120,7 +150,7 @@ func pickup_item_from_area() -> void:
 
 	var areas: Array[Area2D] = pickup_area.get_overlapping_areas()
 	for area in areas:
-		if area.is_in_group("itens"):
+		if area.is_in_group("itens"):  # grupo que você está usando
 			pickup_item(area)
 			return
 
