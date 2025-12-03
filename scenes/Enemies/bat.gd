@@ -34,6 +34,12 @@ func _ready() -> void:
 	target_pos = start_pos
 	_pick_new_roam_target()
 
+	# Toca a animação do morcego
+	if has_node("Sprite2D") and $Sprite2D is AnimatedSprite2D:
+		$Sprite2D.animation = "voando_1"  
+		$Sprite2D.play()
+
+
 
 # ===================================================================
 #  DETECÇÃO DE ITENS (apenas gerencia lista)

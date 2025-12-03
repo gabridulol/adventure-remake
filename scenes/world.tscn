@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=11 format=4 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cfw5u2oiwvjed" path="res://scenes/chalice.tscn" id="4_i7141"]
 [ext_resource type="PackedScene" uid="uid://bsfp2ou6mwlsg" path="res://scenes/magnet.tscn" id="5_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://c0lcst3fdc24s" path="res://scenes/bridge.tscn" id="6_7r4gi"]
-[ext_resource type="Script" uid="uid://ber0ilrsfvha7" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
 
 [node name="World" type="Node2D"]
 
@@ -50,3 +51,6 @@ target_path = NodePath("../Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 0.7019608)
+
+[node name="Bat" parent="." instance=ExtResource("10_w7kh3")]
+position = Vector2(23, 21)
