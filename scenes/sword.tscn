@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpqkngc2cjmjq"]
 
 [ext_resource type="Script" uid="uid://wlu6rpk38s0f" path="res://scripts/sword.gd" id="1_1xgbk"]
-[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_bgdwh"]
+[ext_resource type="Texture2D" uid="uid://cad7l8meptwyh" path="res://assets/items.png" id="2_n355p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8enn"]
 size = Vector2(4, 59)
@@ -10,9 +10,11 @@ size = Vector2(4, 59)
 script = ExtResource("1_1xgbk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.1920929e-07, 0)
-scale = Vector2(0.03125, 0.4609375)
-texture = ExtResource("2_bgdwh")
+position = Vector2(-37, 0)
+scale = Vector2(1.1875, 0.4609375)
+texture = ExtResource("2_n355p")
+region_enabled = true
+region_rect = Rect2(10, 10, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
