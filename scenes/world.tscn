@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/bridge.tscn" id="6_7r4gi"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://e2ht1tv02bll" path="res://scenes/dragon.tscn" id="10_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
 
 [node name="World" type="Node2D"]
 
@@ -54,3 +55,5 @@ color = Color(0, 0, 0, 0.7019608)
 
 [node name="Dragon" parent="." instance=ExtResource("10_w7kh3")]
 position = Vector2(-28, 9)
+[node name="Bat" parent="." instance=ExtResource("10_w7kh3")]
+position = Vector2(23, 21)
