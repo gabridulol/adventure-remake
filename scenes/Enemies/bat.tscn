@@ -234,6 +234,7 @@ animations = [{
 script = ExtResource("1_n531f")
 speed = 150.0
 roam_radius = 300.0
+wander_strength = 5.0
 
 [node name="DetectionArea" type="Area2D" parent="." groups=["Enemies"]]
 

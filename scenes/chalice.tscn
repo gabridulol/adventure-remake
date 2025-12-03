@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfw5u2oiwvjed"]
+[gd_scene load_steps=4 format=3 uid="uid://bcumkuqtvd8yy"]
 
-[ext_resource type="Script" path="res://scripts/chalice.gd" id="1_nlqhh"]
-[ext_resource type="Texture2D" uid="uid://cad7l8meptwyh" path="res://assets/items/items.png" id="2_mjnrg"]
+[ext_resource type="Script" uid="uid://8ncguhoelg5t" path="res://scripts/chalice.gd" id="1_nlqhh"]
+[ext_resource type="Texture2D" uid="uid://cad7l8meptwyh" path="res://assets/itens/items.png" id="2_mjnrg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjnrg"]
 size = Vector2(18, 17)
 
 [node name="chalice" type="Area2D" groups=["itens"]]
+position = Vector2(72, 13)
 script = ExtResource("1_nlqhh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_mjnrg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["itens"]]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_mjnrg")
 region_enabled = true
 region_rect = Rect2(0.8669405, 96.93017, 15.42121, 15.629601)

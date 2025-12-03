@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cp5wkhmovmi6l"]
+[gd_scene load_steps=57 format=3 uid="uid://cp5wkhmovmi6l"]
 
 [ext_resource type="Script" uid="uid://dqjqorrr0wn8d" path="res://scripts/dragon.gd" id="1_vfigm"]
 [ext_resource type="Texture2D" uid="uid://cp75t2whcoutj" path="res://assets/dragon/dragon_black.png" id="2_lmr38"]
@@ -168,22 +168,6 @@ region = Rect2(768, 480, 96, 96)
 atlas = ExtResource("2_lmr38")
 region = Rect2(672, 480, 96, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d4dha"]
-atlas = ExtResource("2_lmr38")
-region = Rect2(0, 576, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v8loc"]
-atlas = ExtResource("2_lmr38")
-region = Rect2(96, 576, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rek2f"]
-atlas = ExtResource("2_lmr38")
-region = Rect2(192, 576, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssdm3"]
-atlas = ExtResource("2_lmr38")
-region = Rect2(288, 576, 96, 96)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5q8uj"]
 animations = [{
 "frames": [{
@@ -314,18 +298,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6mwt7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d4dha")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v8loc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rek2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ssdm3")
 }],
 "loop": false,
 "name": &"dragon_red_dead",
@@ -408,7 +380,7 @@ script = ExtResource("1_vfigm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5q8uj")
 animation = &"dragon_red_dead"
-frame = 14
+frame = 10
 frame_progress = 1.0
 
 [node name="VisionArea" type="Area2D" parent="."]
