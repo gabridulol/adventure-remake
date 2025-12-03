@@ -3,12 +3,13 @@ class_name Player
 
 @export var speed: float = 120.0
 @export var item_rotation_speed_deg: float = 720.0
+@export var walk_anim_fps: float = 6.0  # velocidade da caminhada (frames por segundo)
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var item_pivot: Node2D = $ItemPivot
 @onready var pickup_area: Area2D = $PickupArea
 
-# 8 direções (0..7) em graus
+# 8 direções (0..7) em graus:
 # 0: cima, 1: cima-direita, 2: direita, 3: baixo-direita,
 # 4: baixo, 5: baixo-esquerda, 6: esquerda, 7: cima-esquerda
 const DIR_ANGLES_DEG: Array[float] = [
@@ -22,35 +23,64 @@ const DIR_ANGLES_DEG: Array[float] = [
 	-135.0  # up-left
 ]
 
-var carried_item: Node2D = null
-var facing_dir_index: int = 0  # última direção de movimento (0..7)
+# Paletas: prefixos que viram "prefix + idle" / "prefix + walk"
+# 0 = normal -> "idle" / "walk"
+# 1..6 = suas cores -> "p1_idle", "p1_walk", etc.
+const PALETTE_PREFIXES: Array[String] = [
+	"",      # 0 – normal
+	"p1_",   # 1 – paleta 1
+	"p2_",   # 2 – paleta 2
+	"p3_",   # 3 – paleta 3
+	"p4_",   # 4 – paleta 4
+	"p5_",   # 5 – paleta 5
+	"p6_",   # 6 – paleta 6
+]
+
+var current_palette: int = 0          # índice da paleta atual
+var carried_item: Node2D = null       # item que está sendo carregado (se houver)
+var facing_dir_index: int = 0         # última direção de movimento (0..7)
+var walk_anim_time: float = 0.0       # acumulador de tempo para anim da caminhada
 
 
+# =========================
+#   PALETA / COR
+# =========================
+func set_palette(palette_index: int) -> void:
+	current_palette = clamp(palette_index, 0, PALETTE_PREFIXES.size() - 1)
+
+
+# =========================
+#   LOOP FÍSICO
+# =========================
 func _physics_process(delta: float) -> void:
 	var input_dir: Vector2 = _get_input_dir()
 	var is_moving: bool = input_dir.length() > 0.0
 
-	# Movimento
 	if is_moving:
 		input_dir = input_dir.normalized()
 		velocity = input_dir * speed
+		walk_anim_time += delta
 	else:
 		velocity = Vector2.ZERO
+		walk_anim_time = 0.0
 
 	move_and_slide()
 
-	# Direção do personagem SEMPRE baseada no movimento, não no mouse
+	# Direção SEMPRE baseada no movimento
 	if is_moving:
 		var angle: float = input_dir.angle()
 		facing_dir_index = _dir_index_from_angle(angle)
 
 	_set_animation(facing_dir_index, is_moving)
 
-	# Se estiver segurando um item, ele gira em direção ao mouse
+	# Item na mão gira em direção ao mouse
 	if carried_item != null:
 		_update_item_rotation(delta)
 
 
+# =========================
+#   INPUT DE MOVIMENTO
+# =========================
 func _get_input_dir() -> Vector2:
 	var dir: Vector2 = Vector2.ZERO
 
@@ -66,6 +96,9 @@ func _get_input_dir() -> Vector2:
 	return dir
 
 
+# =========================
+#   ROTAÇÃO DO ITEM
+# =========================
 func _update_item_rotation(delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var target_angle: float = (mouse_pos - global_position).angle()
@@ -77,12 +110,15 @@ func _update_item_rotation(delta: float) -> void:
 	item_pivot.rotation += step
 
 
+# =========================
+#   DIREÇÃO (ÂNGULO -> 0..7)
+# =========================
 func _dir_index_from_angle(angle_rad: float) -> int:
 	var angle_deg: float = rad_to_deg(angle_rad)
 	var best_idx: int = 0
 	var best_dist: float = 9999.0
 
-	for i in DIR_ANGLES_DEG.size():
+	for i in range(DIR_ANGLES_DEG.size()):
 		var dist: float = abs(wrapf(angle_deg - DIR_ANGLES_DEG[i], -180.0, 180.0))
 		if dist < best_dist:
 			best_dist = dist
@@ -91,21 +127,44 @@ func _dir_index_from_angle(angle_rad: float) -> int:
 	return best_idx
 
 
+# =========================
+#   ANIMAÇÃO (USANDO FRAMES)
+# =========================
+# idle: 8 frames (0..7) → 1 frame por direção
+# walk: 16 frames (0..15) → pares (0,1) (2,3) ... (14,15) por direção
 func _set_animation(dir_idx: int, moving: bool) -> void:
-	var anim_name: String
+	var prefix: String = PALETTE_PREFIXES[current_palette]
+
 	if moving:
-		anim_name = "walk_" + str(dir_idx)
+		var anim_name: String = prefix + "walk"
+
+		# Garante que estamos na animação correta
+		if sprite.animation != anim_name:
+			sprite.animation = anim_name
+			sprite.play()
+
+		# Controle manual de frames
+		sprite.speed_scale = 0.0
+
+		# Cada direção ocupa 2 frames consecutivos
+		var base_frame: int = dir_idx * 2
+		var local_step: int = int(floor(walk_anim_time * walk_anim_fps)) % 2
+		sprite.frame = base_frame + local_step
 	else:
-		anim_name = "idle_" + str(dir_idx)
+		var anim_name: String = prefix + "idle"
 
-	if sprite.animation != anim_name:
-		sprite.play(anim_name)
+		if sprite.animation != anim_name:
+			sprite.animation = anim_name
+			sprite.play()
+
+		# Idle = 1 frame por direção
+		sprite.speed_scale = 0.0
+		sprite.frame = dir_idx
 
 
-# -----------------------------
-# Pickup / Drop de itens
-# -----------------------------
-
+# =========================
+#   PICKUP / DROP DE ITENS
+# =========================
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if carried_item != null:
