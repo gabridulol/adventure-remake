@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
-[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cgmgcuo22y1tg" path="res://scenes/key.tscn" id="3_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bbatqrl7neus" path="res://scenes/color_zone.tscn" id="5_71j4m"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
@@ -120,6 +120,40 @@ shape = SubResource("RectangleShape2D_q5onr")
 
 [node name="Bat" parent="." instance=ExtResource("10_w7kh3")]
 position = Vector2(302, 37)
+patrol_points = Array[NodePath]([NodePath("../BatPatrolPoints/point"), NodePath("../BatPatrolPoints/point2"), NodePath("../BatPatrolPoints/point3"), NodePath("../BatPatrolPoints/point4"), NodePath("../BatPatrolPoints/point5"), NodePath("../BatPatrolPoints/point6"), NodePath("../BatPatrolPoints/point7"), NodePath("../BatPatrolPoints/point8"), NodePath("../BatPatrolPoints/point9"), NodePath("../BatPatrolPoints/point10")])
+wander_strength = 1.0
 
 [node name="key" parent="." instance=ExtResource("3_qfnet")]
 position = Vector2(257, -8)
+
+[node name="BatPatrolPoints" type="Node2D" parent="."]
+
+[node name="point" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(312, 229)
+
+[node name="point2" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(667, 393)
+
+[node name="point3" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(68, 403)
+
+[node name="point4" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(639, 571)
+
+[node name="point5" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-739, 324)
+
+[node name="point6" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-317, 4)
+
+[node name="point7" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-312, 182)
+
+[node name="point8" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-293, -346)
+
+[node name="point9" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-373, -200)
+
+[node name="point10" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-378, 413)

@@ -1,65 +1,102 @@
 extends Node2D
 
+# ---------- Movimento ----------
 @export var speed: float = 80.0
 @export var roam_radius: float = 200.0
 @export var hover_amplitude: float = 6.0
 @export var hover_speed: float = 3.5
 @export var reach_threshold: float = 8.0
-@export var swap_cooldown: float = 1.0
 
+# ---------- Cooldown de troca ----------
+@export var swap_cooldown: float = 1.0  # segundos
+
+# ---------- Patrulha pelos pontos ----------
+@export var patrol_points: Array[NodePath] = []
+
+# ---------- Variação de trajetória ----------
+@export var wander_strength: float = 0.6  # 0 = reta, 1+ = bem caótico
+
+# ---------- Estado de itens ----------
+# AGORA: itens_proximos e item_carregado são a própria Area2D raiz do item
 var itens_proximos: Array[Area2D] = []
 var item_carregado: Area2D = null
+var last_swap_time: float = -1000.0
 
+# ---------- Movimento interno ----------
 var start_pos: Vector2
 var target_pos: Vector2
-var rng := RandomNumberGenerator.new()
-var last_swap_time: float = 0.0
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var wander_offset: Vector2 = Vector2.ZERO
 
 
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	start_pos = global_position
+	target_pos = start_pos
 	_pick_new_roam_target()
 
+	# se tiver animação:
+	if has_node("Sprite2D") and $Sprite2D is AnimatedSprite2D:
+		$Sprite2D.animation = "voando_1"
+		$Sprite2D.play()
 
-# ----------------------------------------------------------
-# DETECÇÃO DE ITENS
-# ----------------------------------------------------------
+
+# ===================================================================
+#  DETECÇÃO DE ITENS (apenas gerencia lista)
+# ===================================================================
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("itens") and not itens_proximos.has(area):
+	# item agora é a própria Area2D com grupo "items"
+	if not area.is_in_group("itens"):
+		return
+
+	if not itens_proximos.has(area):
 		itens_proximos.append(area)
 
+
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("itens"):
+	if itens_proximos.has(area):
 		itens_proximos.erase(area)
 
 
-# ----------------------------------------------------------
-# PEGAR E SOLTAR ITENS
-# ----------------------------------------------------------
 func escolher_item() -> Area2D:
 	if itens_proximos.is_empty():
 		return null
+
+	# se já tem algo carregado, tenta pegar um item diferente
 	if item_carregado != null:
-		for it in itens_proximos:
-			if it != item_carregado:
-				return it
-		return null
+		for a: Area2D in itens_proximos:
+			if a != item_carregado:
+				return a
+		return null  # só tem o mesmo item que já tô carregando
+
+	# sem item carregado: pega o primeiro
 	return itens_proximos[0]
 
 
-func pegar_item(item: Area2D) -> void:
-	if item == null:
+# ===================================================================
+#  PEGAR / SOLTAR ITEM  (USANDO A AREA2D COMO NÓ RAIZ DO ITEM)
+# ===================================================================
+
+func pegar_item(area: Area2D) -> void:
+	if area == null:
 		return
 
+	var item: Area2D = area
+
+	# Se já existe item carregado → solta primeiro
 	if item_carregado:
 		soltar_item(item_carregado)
 
-	itens_proximos.erase(item)
+	# Remove a área da lista, se ainda estiver lá
+	if itens_proximos.has(area):
+		itens_proximos.erase(area)
 
+	# Desativa colisão enquanto está sendo carregado
 	item.monitoring = false
 	item.monitorable = false
 
+	# Reparent pro morcego
 	item.reparent(self)
 	item.position = Vector2(0, 12)
 
@@ -71,49 +108,101 @@ func soltar_item(item: Area2D) -> void:
 	if item == null:
 		return
 
-	var world := get_tree().current_scene
+	var world: Node = get_tree().current_scene
 	item.reparent(world)
+
+	# Solta um pouco à direita pra não re-colidir no mesmo frame
 	item.global_position = global_position + Vector2(80, 0)
 
+	# Reativa colisão
 	item.monitoring = true
 	item.monitorable = true
+
 	item_carregado = null
 
 
-# ----------------------------------------------------------
-# MOVIMENTO
-# ----------------------------------------------------------
+# ===================================================================
+#  LOOP PRINCIPAL: movimento + escolha de item com cooldown
+# ===================================================================
+
 func _physics_process(delta: float) -> void:
 	_move_toward_target(delta)
 
-	var now = Time.get_ticks_msec() / 1000.0
-	if not itens_proximos.is_empty():
-		var alvo = escolher_item()
-		if alvo != null:
-			if item_carregado == null:
-				pegar_item(alvo)
-				last_swap_time = now
-			elif now - last_swap_time >= swap_cooldown:
-				pegar_item(alvo)
-				last_swap_time = now
+	if itens_proximos.is_empty():
+		return
 
+	var now: float = float(Time.get_ticks_msec()) / 1000.0
+	var alvo: Area2D = escolher_item()
+	if alvo == null:
+		return
+
+	if item_carregado == null:
+		# sem item: pega direto
+		pegar_item(alvo)
+		last_swap_time = now
+	else:
+		# já tem item: só troca se passou o cooldown
+		if now - last_swap_time >= swap_cooldown:
+			pegar_item(alvo)
+			last_swap_time = now
+
+
+# ===================================================================
+#  MOVIMENTO COM WANDER (trajetória não retilínea)
+# ===================================================================
 
 func _move_toward_target(delta: float) -> void:
-	var hover = Vector2(0, sin(Time.get_ticks_msec() / 1000.0 * hover_speed) * hover_amplitude)
-	if target_pos == null:
-		_pick_new_roam_target()
+	# hover visual
+	var hover: Vector2 = Vector2(
+		0,
+		sin(float(Time.get_ticks_msec()) / 1000.0 * hover_speed) * hover_amplitude
+	)
 
-	var dir = (target_pos - global_position)
-	if dir.length() > reach_threshold:
-		global_position += dir.normalized() * speed * delta
+	var to_target: Vector2 = target_pos - global_position
+	var dist: float = to_target.length()
+
+	if dist > reach_threshold:
+		var base_dir: Vector2 = to_target.normalized()
+
+		# direção aleatória suave
+		var random_dir: Vector2 = Vector2(
+			rng.randf_range(-1.0, 1.0),
+			rng.randf_range(-1.0, 1.0)
+		)
+		if random_dir != Vector2.ZERO:
+			random_dir = random_dir.normalized()
+
+		# 0.08 controla quão rápido o "rumo" muda
+		wander_offset = wander_offset.lerp(random_dir, 0.08)
+
+		# quanto mais longe, mais forte o wander
+		var wander_factor: float = clamp(dist / roam_radius, 0.0, 1.0)
+
+		var final_dir: Vector2 = (
+			base_dir +
+			wander_offset * wander_strength * wander_factor
+		).normalized()
+
+		global_position += final_dir * speed * delta
 	else:
 		_pick_new_roam_target()
 
-	if has_node("AnimatedSprite2D"):
-		$AnimatedSprite2D.position = hover
+	if has_node("Sprite2D"):
+		$Sprite2D.position = hover
 
 
 func _pick_new_roam_target() -> void:
-	var ang = rng.randf() * PI * 2.0
-	var r = rng.randf() * roam_radius
+	# Se tiver pontos de patrulha configurados, usa eles
+	if patrol_points.size() > 0:
+		var idx: int = rng.randi_range(0, patrol_points.size() - 1)
+		var path: NodePath = patrol_points[idx]
+		var node: Node = get_node_or_null(path)
+		if node != null and node is Node2D:
+			var p: Node2D = node as Node2D
+			target_pos = p.global_position
+			return
+
+	# Fallback: posição aleatória num raio em volta do start_pos
+	var ang: float = rng.randf() * TAU
+	var r: float = rng.randf() * roam_radius
 	target_pos = start_pos + Vector2(cos(ang), sin(ang)) * r
