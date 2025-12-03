@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=4 format=3 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
@@ -8,10 +8,10 @@
 
 [node name="Adventure" type="Sprite2D" parent="."]
 texture = ExtResource("2_4wyf3")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(-436, -278)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAKABEABQBWAAMAAAAKABIABQBWAAQAAAALABEABQBXAAMAAAALABIABQBXAAQAAAAMABEABQBWAAMAAAAMABIABQBWAAQAAAANABEABQBXAAMAAAANABIABQBXAAQAAAAOABEABQBWAAMAAAAOABIABQBWAAQAAAAPABEABQBXAAMAAAAPABIABQBXAAQAAAAQABEABQBWAAMAAAAQABIABQBWAAQAAAARABEABQBXAAMAAAARABIABQBXAAQAAAA=")
 tile_set = ExtResource("3_k0juu")
