@@ -6,16 +6,33 @@
 
 [node name="World" type="Node2D"]
 
+[node name="BatPatrolPoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(105, -24)
+
+[node name="Point2" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(44, 375)
+
+[node name="Point3" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(716, 403)
+
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Itens" parent="." instance=ExtResource("2_4wyf3")]
-position = Vector2(490, 191)
+position = Vector2(48, 63)
 
 [node name="Itens2" parent="." instance=ExtResource("2_4wyf3")]
-position = Vector2(140, 184)
+position = Vector2(748, 308)
+
+[node name="Itens3" parent="." instance=ExtResource("2_4wyf3")]
+position = Vector2(-45, 425)
 
 [node name="Bat" parent="." instance=ExtResource("3_k0juu")]
 position = Vector2(313, 188)
 speed = 400.0
+roam_radius = 200.0
+patrol_points = Array[NodePath]([NodePath("../BatPatrolPoints/Point1"), NodePath("../BatPatrolPoints/Point2"), NodePath("../BatPatrolPoints/Point3")])
+wander_strength = 30.0
