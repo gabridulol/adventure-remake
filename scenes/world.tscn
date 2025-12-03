@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=3 format=3 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://c07qhkl6jqxga" path="res://scenes/dragon.tscn" id="2_rwgxs"]
 
 [node name="World" type="Node2D"]
 
+[node name="Dragon_fast" parent="." instance=ExtResource("2_rwgxs")]
+
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+position = Vector2(277, 331)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Dragon" parent="." groups=["player"] instance=ExtResource("2_rwgxs")]
+position = Vector2(812, 272)
+
+[node name="Dragon_slower" parent="." instance=ExtResource("2_rwgxs")]
