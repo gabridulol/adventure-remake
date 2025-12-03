@@ -4,19 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://cad7l8meptwyh" path="res://assets/itens/items.png" id="2_n355p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n355p"]
-radius = 4.2264977
+radius = 1.5700785
+height = 20.04318
 
 [node name="sword" type="Area2D" groups=["itens"]]
 script = ExtResource("1_1xgbk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.046875, 3.84375)
-scale = Vector2(1.9937499, 1.7304688)
+position = Vector2(6.377571, 0.31734562)
+rotation = -5.5361843
+scale = Vector2(1.5, 1.301)
 texture = ExtResource("2_n355p")
 region_enabled = true
 region_rect = Rect2(0.28722382, -0.27438545, 15.886925, 16.104553)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.078125, -0.5039053)
-rotation = -2.268928
+position = Vector2(8, 0)
+rotation = -1.5009831
+scale = Vector2(1.5, 1.301)
 shape = SubResource("CapsuleShape2D_n355p")
