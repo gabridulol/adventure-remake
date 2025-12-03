@@ -10,7 +10,7 @@ radius = 57.035076
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_adi6m")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["items"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-4, -3)
