@@ -1,6 +1,8 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c7c2v1jko7sxf"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://c7c2v1jko7sxf"]
 
 [ext_resource type="Texture2D" uid="uid://c0di7441va5y7" path="res://assets/tileset/tileset.png" id="1_qwp6l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwp6l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qwp6l"]
 texture = ExtResource("1_qwp6l")
@@ -9,12 +11,20 @@ texture = ExtResource("1_qwp6l")
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
+2:0/0/modulate = Color(1, 1, 1, 0.8)
+2:0/0/material = SubResource("ShaderMaterial_qwp6l")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
+3:0/0/modulate = Color(0, 0, 0, 0.8)
+3:0/0/material = SubResource("ShaderMaterial_qwp6l")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
+4:0/0/modulate = Color(0, 0, 0, 0.8)
+4:0/0/material = SubResource("ShaderMaterial_qwp6l")
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
+5:0/0/modulate = Color(1, 1, 1, 0.8)
+5:0/0/material = SubResource("ShaderMaterial_qwp6l")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:0/0 = 0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -201,12 +211,20 @@ texture = ExtResource("1_qwp6l")
 1:1/0 = 0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
+2:1/0/modulate = Color(1, 1, 1, 0.8)
+2:1/0/material = SubResource("ShaderMaterial_qwp6l")
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
+3:1/0/modulate = Color(0, 0, 0, 0.8)
+3:1/0/material = SubResource("ShaderMaterial_qwp6l")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:1/0 = 0
+4:1/0/modulate = Color(0, 0, 0, 0.8)
+4:1/0/material = SubResource("ShaderMaterial_qwp6l")
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:1/0 = 0
+5:1/0/modulate = Color(1, 1, 1, 0.8)
+5:1/0/material = SubResource("ShaderMaterial_qwp6l")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0 = 0
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

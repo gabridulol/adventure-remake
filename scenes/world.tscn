@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
-[ext_resource type="PackedScene" path="res://scenes/sword.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://dpqkngc2cjmjq" path="res://scenes/sword.tscn" id="2_rwgxs"]
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
-[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_qfnet"]
-[ext_resource type="PackedScene" path="res://scenes/chalice.tscn" id="4_i7141"]
-[ext_resource type="PackedScene" path="res://scenes/magnet.tscn" id="5_4mrxx"]
-[ext_resource type="PackedScene" path="res://scenes/bridge.tscn" id="6_7r4gi"]
-[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://cgmgcuo22y1tg" path="res://scenes/key.tscn" id="3_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cfw5u2oiwvjed" path="res://scenes/chalice.tscn" id="4_i7141"]
+[ext_resource type="PackedScene" uid="uid://bsfp2ou6mwlsg" path="res://scenes/magnet.tscn" id="5_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://c0lcst3fdc24s" path="res://scenes/bridge.tscn" id="6_7r4gi"]
+[ext_resource type="Script" uid="uid://ber0ilrsfvha7" path="res://scenes/camera_2d.gd" id="7_i7141"]
 
 [node name="World" type="Node2D"]
 
@@ -21,9 +21,9 @@ metadata/_edit_lock_ = true
 position = Vector2(1, 0)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray
-("AAAKABEABQBWAAMAAAAKABIABQBWAAQAAAALABEABQBXAAMAAAALABIABQBXAAQAAAAMABEABQBWAAMAAAAMABIABQBWAAQAAAANABEABQBXAAMAAAANABIABQBXAAQAAAAOABEABQBWAAMAAAAOABIABQBWAAQAAAAPABEABQBXAAMAAAAPABIABQBXAAQAAAAQABEABQBWAAMAAAAQABIABQBWAAQAAAARABEABQBXAAMAAAARABIABQBXAAQAAAAQABMABQABAAAAAAAQABQABQABAAEAAAARABMABQACAAAAAAARABQABQACAAEAAAAOABMABQABAAAAAAAOABQABQABAAEAAAAPABMABQACAAAAAAAPABQABQACAAEAAAAPAA4ABQABAAAAAAAPAA8ABQABAAEAAAAQAA4ABQACAAAAAAAQAA8ABQACAAEAAAALABYABQABAAAAAAALABcABQABAAEAAAAMABYABQACAAAAAAAMABcABQACAAEAAAALABQABQABAAAAAAALABUABQABAAEAAAAMABQABQACAAAAAAAMABUABQACAAEAAAAAAAEABQABAAAAAAAAAAIABQABAAEAAAABAAEABQACAAAAAAABAAIABQACAAEAAAA=")
-
+show_behind_parent = true
+top_level = true
+tile_map_data = PackedByteArray("AAAKABEABQBWAAMAAAAKABIABQBWAAQAAAALABEABQBXAAMAAAALABIABQBXAAQAAAAMABEABQBWAAMAAAAMABIABQBWAAQAAAANABEABQBXAAMAAAANABIABQBXAAQAAAAOABEABQBWAAMAAAAOABIABQBWAAQAAAAPABEABQBXAAMAAAAPABIABQBXAAQAAAAQABEABQBWAAMAAAAQABIABQBWAAQAAAARABEABQBXAAMAAAARABIABQBXAAQAAAAQABMABQABAAAAAAAQABQABQABAAEAAAARABMABQACAAAAAAARABQABQACAAEAAAAOABMABQABAAAAAAAOABQABQABAAEAAAAPABMABQACAAAAAAAPABQABQACAAEAAAAPAA4ABQABAAAAAAAPAA8ABQABAAEAAAAQAA4ABQACAAAAAAAQAA8ABQACAAEAAAALABYABQABAAAAAAALABcABQABAAEAAAAMABYABQACAAAAAAAMABcABQACAAEAAAALABQABQABAAAAAAALABUABQABAAEAAAAMABQABQACAAAAAAAMABUABQACAAEAAAAAAAEABQABAAAAAAAAAAIABQABAAEAAAABAAEABQACAAAAAAABAAIABQACAAEAAAA=")
 tile_set = ExtResource("3_k0juu")
 
 [node name="espada" parent="." instance=ExtResource("2_rwgxs")]
@@ -33,7 +33,7 @@ position = Vector2(227, 343)
 position = Vector2(28, 1)
 
 [node name="chave2" parent="." instance=ExtResource("3_qfnet")]
-position = Vector2(182, 106)
+position = Vector2(33, 55)
 
 [node name="calice" parent="." instance=ExtResource("4_i7141")]
 position = Vector2(217, 171)
