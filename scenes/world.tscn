@@ -1,15 +1,17 @@
-[gd_scene load_steps=20 format=4 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=23 format=4 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://b5sp44n7j732g" path="res://scenes/sword.tscn" id="2_rwgxs"]
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
-[ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cgmgcuo22y1tg" path="res://scenes/key.tscn" id="3_qfnet"]
+[ext_resource type="PackedScene" uid="uid://bcumkuqtvd8yy" path="res://scenes/chalice.tscn" id="4_i7141"]
 [ext_resource type="PackedScene" uid="uid://bbatqrl7neus" path="res://scenes/color_zone.tscn" id="5_71j4m"]
-[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="Script" uid="uid://ber0ilrsfvha7" path="res://scenes/camera_2d.gd" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://cnsrksevs56vw" path="res://scenes/teleporte.tscn" id="8_4mrxx"]
-[ext_resource type="PackedScene" path="res://scenes/dragon.tscn" id="10_e3hyu"]
+[ext_resource type="PackedScene" uid="uid://cp5wkhmovmi6l" path="res://scenes/dragon.tscn" id="10_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
+[ext_resource type="Script" uid="uid://buhnfpse4wb4n" path="res://scenes/area_2d.gd" id="12_q5onr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
 size = Vector2(292, 386)
@@ -37,6 +39,8 @@ size = Vector2(681.5, 199)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jhx03"]
 size = Vector2(30, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8fc1"]
+
 [node name="World" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -57,6 +61,18 @@ target_path = NodePath("../Player")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0, 0, 0, 0.7019608)
+
+[node name="chalice" parent="." instance=ExtResource("4_i7141")]
+position = Vector2(-424, -630)
+
+[node name="chalice2" parent="." instance=ExtResource("4_i7141")]
+position = Vector2(-370, -632)
+
+[node name="chalice3" parent="." instance=ExtResource("4_i7141")]
+position = Vector2(-295, -632)
+
+[node name="chalice4" parent="." instance=ExtResource("4_i7141")]
+position = Vector2(-211, -628)
 
 [node name="Player2" parent="." instance=ExtResource("1_nnsk1")]
 visible = false
@@ -124,6 +140,8 @@ shape = SubResource("RectangleShape2D_q5onr")
 
 [node name="Bat" parent="." instance=ExtResource("10_w7kh3")]
 position = Vector2(302, 37)
+patrol_points = Array[NodePath]([NodePath("../BatPatrolPoints/point"), NodePath("../BatPatrolPoints/point2"), NodePath("../BatPatrolPoints/point3"), NodePath("../BatPatrolPoints/point4"), NodePath("../BatPatrolPoints/point5"), NodePath("../BatPatrolPoints/point6"), NodePath("../BatPatrolPoints/point7"), NodePath("../BatPatrolPoints/point8"), NodePath("../BatPatrolPoints/point9"), NodePath("../BatPatrolPoints/point10")])
+wander_strength = 1.0
 
 [node name="key" parent="." instance=ExtResource("3_qfnet")]
 position = Vector2(257, -8)
@@ -337,6 +355,17 @@ position = Vector2(-244, -509)
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jhx03")
 
+[node name="TeleportZone25" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-195, -457)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone25"]
+position = Vector2(637, 511)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone25"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
 [node name="TeleportZone20" parent="." instance=ExtResource("8_4mrxx")]
 position = Vector2(-485, -64)
 target_spawn_path = NodePath("Marker2D")
@@ -396,4 +425,45 @@ position = Vector2(524, 543)
 position = Vector2(576, 610)
 
 [node name="Dragon2" parent="." instance=ExtResource("10_e3hyu")]
-position = Vector2(5, 433)
+position = Vector2(19, 396)
+
+[node name="BatPatrolPoints" type="Node2D" parent="."]
+
+[node name="point" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(312, 229)
+
+[node name="point2" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(667, 393)
+
+[node name="point3" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(68, 403)
+
+[node name="point4" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(639, 571)
+
+[node name="point5" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-739, 324)
+
+[node name="point6" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-317, 4)
+
+[node name="point7" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-312, 182)
+
+[node name="point8" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-293, -346)
+
+[node name="point9" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-373, -200)
+
+[node name="point10" type="Node2D" parent="BatPatrolPoints"]
+position = Vector2(-378, 413)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("12_q5onr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(451, -65)
+shape = SubResource("RectangleShape2D_o8fc1")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
