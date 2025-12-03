@@ -11,6 +11,10 @@ var state: State = State.IDLE
 var target: CharacterBody2D = null
 
 func _ready() -> void:
+	# animação inicial (se tiver)
+	if anim:
+		anim.play("dragon_red") # ou "idle", o nome que você tiver
+
 	print("Dragon READY, vision_area =", vision_area)
 	vision_area.body_entered.connect(_on_vision_body_entered)
 	vision_area.body_exited.connect(_on_vision_body_exited)
@@ -21,7 +25,7 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 
 		State.CHASING:
-			if target:
+			if target and is_instance_valid(target):
 				var direction: Vector2 = (target.global_position - global_position).normalized()
 				velocity = direction * speed
 			else:
