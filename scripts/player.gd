@@ -48,6 +48,35 @@ var walk_anim_time: float = 0.0       # acumulador de tempo para anim da caminha
 func set_palette(palette_index: int) -> void:
 	current_palette = clamp(palette_index, 0, PALETTE_PREFIXES.size() - 1)
 
+@export var respawn_point: NodePath
+var _respawn_position: Vector2
+
+
+func _ready() -> void:
+	# calcula posição de respawn
+	if respawn_point != NodePath(""):
+		var node := get_node_or_null(respawn_point)
+		if node and node is Node2D:
+			_respawn_position = (node as Node2D).global_position
+		else:
+			_respawn_position = global_position
+	else:
+		_respawn_position = global_position
+
+
+func die() -> void:
+	# Aqui você pode tocar uma animação, som, etc.
+	print("Player morreu! Respawnando...")
+
+	# dropa item, se quiser
+	if carried_item != null:
+		drop_item()
+
+	# respawn simples
+	global_position = _respawn_position
+	velocity = Vector2.ZERO
+
+
 
 # =========================
 #   LOOP FÍSICO

@@ -7,17 +7,24 @@ var state: State = State.IDLE
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_area: Area2D = $VisionArea
+@onready var hitbox: Area2D = $Hitbox
 
 var target: CharacterBody2D = null
 
-func _ready() -> void:
-	# animação inicial (se tiver)
-	if anim:
-		anim.play("dragon_red") # ou "idle", o nome que você tiver
 
-	print("Dragon READY, vision_area =", vision_area)
+func _ready() -> void:
+	# animação inicial
+	if anim:
+		anim.play("dragon_red") # ajusta pro nome da sua animação
+
+	# visão para perseguir o player
 	vision_area.body_entered.connect(_on_vision_body_entered)
 	vision_area.body_exited.connect(_on_vision_body_exited)
+
+	# hitbox para causar dano / receber dano
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
+	hitbox.area_entered.connect(_on_hitbox_area_entered)
+
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -37,14 +44,66 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
+# ==========================
+#   VISÃO (perseguir player)
+# ==========================
 func _on_vision_body_entered(body: Node) -> void:
-	print("VISION ENTER:", body, "groups:", body.get_groups())
 	if body.is_in_group("player") and state != State.DEAD:
-		target = body
+		target = body as CharacterBody2D
 		state = State.CHASING
 
+
 func _on_vision_body_exited(body: Node) -> void:
-	print("VISION EXIT:", body)
 	if body == target:
 		target = null
 		state = State.IDLE
+
+
+# ==========================
+#   HITBOX (colisão real)
+# ==========================
+# Player encostou no corpo do dragão → player morre (se dragão vivo)
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if state == State.DEAD:
+		return
+
+	if body.is_in_group("player"):
+		var player := body as Player
+		player.die()  # vamos criar esse método no Player
+		# Adventure original normalmente deixa o dragão vivo;
+		# se quiser matar os dois, pode chamar die() aqui também.
+
+
+# Espada (item) encostou no dragão → dragão morre
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if state == State.DEAD:
+		return
+
+	# Só queremos itens
+	if not area.is_in_group("itens"):
+		return
+
+	# Checa se o item é uma espada
+	var item_node := area as Node
+	if item_node is Sword:
+		die()
+
+
+func die() -> void:
+	if state == State.DEAD:
+		return
+
+	state = State.DEAD
+
+	# Troca animação (ajusta pro nome que você tiver)
+	if anim:
+		anim.play("dragon_red_dead")
+		#anim.stop()
+
+	# Desativa hitbox pra não causar mais dano
+	hitbox.monitoring = false
+	hitbox.monitorable = false
+
+	# Opcional: sair do grupo "enemy" ou "dragon", se estiver usando
+	# remove_from_group("dragon")
