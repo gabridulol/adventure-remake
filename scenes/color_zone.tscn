@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbatqrl7neus"]
+
+[ext_resource type="Script" uid="uid://bfcd20ybg8840" path="res://scenes/color_zone.gd" id="1_w7ugc"]
+
+[node name="ColorZone" type="Area2D"]
+position = Vector2(187, -72)
+script = ExtResource("1_w7ugc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

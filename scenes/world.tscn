@@ -1,9 +1,33 @@
-[gd_scene load_steps=5 format=4 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=14 format=4 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://bbatqrl7neus" path="res://scenes/color_zone.tscn" id="5_71j4m"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(292, 386)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfnet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7141"]
+size = Vector2(303, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mrxx"]
+size = Vector2(312, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7r4gi"]
+size = Vector2(307, 184)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7kh3"]
+size = Vector2(905, 188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3hyu"]
+size = Vector2(303, 199)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5onr"]
+size = Vector2(681.5, 199)
 
 [node name="World" type="Node2D"]
 
@@ -12,6 +36,7 @@ tile_map_data = PackedByteArray("AAALAA8ABQBbABIAAAALABAABQBWAA0AAAAMAA8ABQBVABE
 tile_set = ExtResource("3_k0juu")
 
 [node name="Adventure" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1558, 34)
 texture = ExtResource("2_4wyf3")
 metadata/_edit_lock_ = true
@@ -30,3 +55,63 @@ color = Color(0, 0, 0, 0.7019608)
 [node name="Player2" parent="." instance=ExtResource("1_nnsk1")]
 visible = false
 position = Vector2(-4, -20)
+
+[node name="ColorZone" parent="." instance=ExtResource("5_71j4m")]
+palette_index = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone"]
+position = Vector2(132, 168)
+shape = SubResource("RectangleShape2D_71j4m")
+
+[node name="ColorZone2" parent="." instance=ExtResource("5_71j4m")]
+palette_index = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone2"]
+shape = SubResource("RectangleShape2D_qfnet")
+
+[node name="ColorZone3" parent="." instance=ExtResource("5_71j4m")]
+position = Vector2(504, 495)
+palette_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone3"]
+position = Vector2(141.5, 74)
+shape = SubResource("RectangleShape2D_i7141")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ColorZone3"]
+position = Vector2(-819, -876)
+shape = SubResource("RectangleShape2D_4mrxx")
+
+[node name="ColorZone4" parent="." instance=ExtResource("5_71j4m")]
+palette_index = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone4"]
+position = Vector2(-503.5, -117)
+shape = SubResource("RectangleShape2D_7r4gi")
+
+[node name="ColorZone5" parent="." instance=ExtResource("5_71j4m")]
+palette_index = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone5"]
+position = Vector2(153.5, 457)
+shape = SubResource("RectangleShape2D_w7kh3")
+
+[node name="ColorZone6" parent="." instance=ExtResource("5_71j4m")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone6"]
+position = Vector2(-506.5, -509.5)
+shape = SubResource("RectangleShape2D_e3hyu")
+
+[node name="ColorZone7" parent="." instance=ExtResource("5_71j4m")]
+palette_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorZone7"]
+position = Vector2(-646.75, 466.5)
+shape = SubResource("RectangleShape2D_q5onr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ColorZone7"]
+position = Vector2(-366, 260)
+shape = SubResource("RectangleShape2D_q5onr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ColorZone7"]
+position = Vector2(-672, 77)
+shape = SubResource("RectangleShape2D_q5onr")
