@@ -59,7 +59,6 @@ script = ExtResource("7_i7141")
 target_path = NodePath("../Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0, 0, 0, 0.7019608)
 
 [node name="chalice" parent="." instance=ExtResource("4_i7141")]

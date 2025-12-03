@@ -1278,7 +1278,6 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(0, 7.6293945e-06)
 scale = Vector2(18.734375, 18.463541)
 energy = 1.2
