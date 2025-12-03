@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=4 format=3 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://c53jp5tc2h5ic" path="res://scenes/Itens/Itens.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="3_k0juu"]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Itens" parent="." instance=ExtResource("2_4wyf3")]
+position = Vector2(551, 154)
+
+[node name="Bat" parent="." instance=ExtResource("3_k0juu")]
+position = Vector2(270, 199)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2od1xrvqxs4o"]
+
+[ext_resource type="Script" uid="uid://clncwmbkqmuve" path="res://scenes/Enemies/bat.gd" id="1_n531f"]
+[ext_resource type="Texture2D" uid="uid://buje32rbwstvn" path="res://assets/player/player.png" id="2_n531f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1j6a"]
+radius = 197.00253
+
+[node name="Bat" type="Node2D" groups=["Enemies"]]
+script = ExtResource("1_n531f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(57.5, -57.000015)
+scale = Vector2(19.15625, 16.312498)
+texture = ExtResource("2_n531f")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, -21)
+shape = SubResource("CircleShape2D_v1j6a")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
