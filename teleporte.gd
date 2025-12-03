@@ -6,8 +6,7 @@ class_name TeleportZone
 # opcional: se você quer dar um pequeno offset extra
 @export var offset: Vector2 = Vector2.ZERO
 
-
-func _on_TeleportZone_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if not (body is Player):
 		return
 

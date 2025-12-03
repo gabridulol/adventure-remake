@@ -1,11 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://d2guvy8ue8rse"]
+[gd_scene load_steps=20 format=4 uid="uid://d2guvy8ue8rse"]
 
 [ext_resource type="PackedScene" uid="uid://cmqmmiyf4cc14" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://4v858sjlnsbq" path="res://assets/tileset/adventure.png" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://b5sp44n7j732g" path="res://scenes/sword.tscn" id="2_rwgxs"]
 [ext_resource type="TileSet" uid="uid://c7c2v1jko7sxf" path="res://assets/tileset/tileset.tres" id="3_k0juu"]
 [ext_resource type="PackedScene" path="res://scenes/key.tscn" id="3_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bbatqrl7neus" path="res://scenes/color_zone.tscn" id="5_71j4m"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://cnsrksevs56vw" path="res://scenes/teleporte.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" path="res://scenes/dragon.tscn" id="10_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://b2od1xrvqxs4o" path="res://scenes/Enemies/bat.tscn" id="10_w7kh3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
@@ -31,6 +34,9 @@ size = Vector2(303, 199)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5onr"]
 size = Vector2(681.5, 199)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhx03"]
+size = Vector2(30, 20)
+
 [node name="World" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -38,10 +44,8 @@ tile_map_data = PackedByteArray("AAALAA8ABQBbABIAAAALABAABQBWAA0AAAAMAA8ABQBVABE
 tile_set = ExtResource("3_k0juu")
 
 [node name="Adventure" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1558, 34)
+position = Vector2(1536, -648)
 texture = ExtResource("2_4wyf3")
-metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(327, 188)
@@ -123,3 +127,273 @@ position = Vector2(302, 37)
 
 [node name="key" parent="." instance=ExtResource("3_qfnet")]
 position = Vector2(257, -8)
+
+[node name="TeleportZone2" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(142, 232)
+target_spawn_path = NodePath("CollisionShape2D/Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone2"]
+position = Vector2(20, 24)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone2/CollisionShape2D"]
+position = Vector2(-637, 0)
+
+[node name="TeleportZone11" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(142, 232)
+target_spawn_path = NodePath("CollisionShape2D/Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone11"]
+position = Vector2(-649, 21)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone11/CollisionShape2D"]
+position = Vector2(627, 5)
+
+[node name="TeleportZone3" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-727, 503)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone3"]
+position = Vector2(638, -395)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone3"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone4" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-665, 503)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone4"]
+position = Vector2(611, -385)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone4"]
+position = Vector2(-29, 1)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone5" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-58, 74)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone5"]
+position = Vector2(-634, 388)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone5"]
+position = Vector2(3, -3)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone6" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-16, 69)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone6"]
+position = Vector2(-426, 378)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone6"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone24" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-243, 450)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone24"]
+position = Vector2(-70, -446)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone24"]
+position = Vector2(158, -6)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone21" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(85, 74)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone21"]
+position = Vector2(-426, 378)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone21"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone22" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(23, 66)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone22"]
+position = Vector2(-426, 378)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone22"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone23" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(49, 71)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone23"]
+position = Vector2(-426, 378)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone23"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone7" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-543, 505)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone7"]
+position = Vector2(567, -393)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone7"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone8" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-585, 505)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone8"]
+position = Vector2(673, -390)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone8"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone9" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-141, -65)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone9"]
+position = Vector2(-631, 385)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone9"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone10" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-815, 316)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone10"]
+position = Vector2(631, -378)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone10"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone12" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(158, 193)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone12"]
+position = Vector2(-610, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone12"]
+position = Vector2(-5, 1)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone16" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-500, 127)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone16"]
+position = Vector2(622, 67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone16"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone17" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(156, 124)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone17"]
+position = Vector2(-600, -52)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone17"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone18" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-494, 65)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone18"]
+position = Vector2(621, 67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone18"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone19" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-194, 450)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone19"]
+position = Vector2(-244, -509)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone19"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone20" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-485, -64)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone20"]
+position = Vector2(347, 515)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone20"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone13" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-491, 187)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone13"]
+position = Vector2(544, -67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone13"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone14" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-149, 65)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone14"]
+position = Vector2(-637, 387)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone14"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="TeleportZone15" parent="." instance=ExtResource("8_4mrxx")]
+position = Vector2(-817, 452)
+target_spawn_path = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="TeleportZone15"]
+position = Vector2(627, -392)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TeleportZone15"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jhx03")
+
+[node name="key2" parent="." instance=ExtResource("3_qfnet")]
+position = Vector2(240, 165)
+
+[node name="sword" parent="." instance=ExtResource("2_rwgxs")]
+position = Vector2(632, 438)
+
+[node name="key3" parent="." instance=ExtResource("3_qfnet")]
+position = Vector2(524, 543)
+
+[node name="key4" parent="." instance=ExtResource("3_qfnet")]
+
+[node name="Dragon" parent="." instance=ExtResource("10_e3hyu")]
+position = Vector2(576, 610)
+
+[node name="Dragon2" parent="." instance=ExtResource("10_e3hyu")]
+position = Vector2(5, 433)
