@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cmqmmiyf4cc14"]
+[gd_scene load_steps=32 format=3 uid="uid://cmqmmiyf4cc14"]
 
 [ext_resource type="Script" uid="uid://cqkpdh8k2fs0f" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://bcbxw0i18rnd6" path="res://assets/player/WhatsApp Image 2025-12-02 at 21.48.40 (1).jpeg" id="45_g5jhy"]
@@ -260,6 +260,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(14, 18)
 
+[sub_resource type="Curve" id="Curve_g2els"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_g2els"]
+resource_local_to_scene = true
+curve = SubResource("Curve_g2els")
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_4flbx")
 
@@ -278,3 +284,8 @@ frame_progress = 0.12981153
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_g2els")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 2.0
+shadow_enabled = true
+texture = SubResource("CurveTexture_g2els")

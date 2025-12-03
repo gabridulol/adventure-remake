@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0lcst3fdc24s"]
+
+[ext_resource type="Script" uid="uid://uuqjecmhva8c" path="res://scripts/bridge.gd" id="1_4f058"]
+[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_67ns3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0lwo"]
+size = Vector2(11, 59)
+
+[node name="bridge" type="Area2D" groups=["itens"]]
+script = ExtResource("1_4f058")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.08984375, 0.4609375)
+texture = ExtResource("2_67ns3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_o0lwo")

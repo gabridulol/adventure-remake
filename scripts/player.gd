@@ -108,25 +108,19 @@ func _set_animation(dir_idx: int, moving: bool) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		print("1")
 		if carried_item != null:
-			print("2")
 			drop_item()
 		else:
-			print("3")
 			pickup_item_from_area()
 
 
 func pickup_item_from_area() -> void:
 	if pickup_area == null:
-		print("Não tem nada")
 		return
 
 	var areas: Array[Area2D] = pickup_area.get_overlapping_areas()
-	print("tentando pegar")
 	for area in areas:
-		if area.is_in_group("items"):
-			print("Pegandoooo Ae")
+		if area.is_in_group("itens"):
 			pickup_item(area)
 			return
 

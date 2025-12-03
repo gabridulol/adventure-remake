@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsfp2ou6mwlsg"]
+
+[ext_resource type="Script" uid="uid://cbkhrqu15lpiu" path="res://scripts/magnet.gd" id="1_0270p"]
+[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_5a5lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0lwo"]
+size = Vector2(39, 59)
+
+[node name="magnet" type="Area2D" groups=["itens"]]
+script = ExtResource("1_0270p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.31054688, 0.4609375)
+texture = ExtResource("2_5a5lh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["itens"]]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_o0lwo")

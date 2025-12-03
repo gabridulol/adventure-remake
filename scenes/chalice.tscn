@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfw5u2oiwvjed"]
+
+[ext_resource type="Script" uid="uid://8ncguhoelg5t" path="res://scripts/chalice.gd" id="1_nlqhh"]
+[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_ak1bu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwm0u"]
+size = Vector2(19, 7)
+
+[node name="chalice" type="Area2D" groups=["itens"]]
+script = ExtResource("1_nlqhh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["itens"]]
+position = Vector2(-0.50000024, -1.1920929e-07)
+scale = Vector2(0.1484375, 0.046875)
+texture = ExtResource("2_ak1bu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hwm0u")

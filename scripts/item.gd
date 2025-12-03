@@ -1,4 +1,3 @@
-# items/Item.gd
 extends Area2D
 class_name Item
 
@@ -14,15 +13,14 @@ var carried_by: Node = null
 
 func on_pickup(by: Node) -> void:
 	carried_by = by
-	# Se o item precisar fazer algo especial ao ser pego, você sobrescreve isso na subclasse.
+	# Subclasses podem sobrescrever, mas sempre chamando `super.on_pickup(by)` se precisar.
 
 
 func on_drop() -> void:
 	carried_by = null
-	# Se o item precisar resetar estado ao cair no chão, sobrescreve aqui.
+	# Subclasses podem sobrescrever se precisarem resetar algo.
 
 
 func on_use() -> void:
 	# Default: não faz nada.
-	# Espada, por exemplo, vai sobrescrever isso pra atacar.
 	pass
