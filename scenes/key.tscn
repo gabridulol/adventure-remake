@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgmgcuo22y1tg"]
 
-[ext_resource type="Script" uid="uid://bqypwdfknuepg" path="res://scripts/key.gd" id="1_4lytf"]
-[ext_resource type="Texture2D" uid="uid://gwqejiy15vxf" path="res://icon.svg" id="2_spc1i"]
+[ext_resource type="Script" path="res://scripts/key.gd" id="1_4lytf"]
+[ext_resource type="Texture2D" uid="uid://cad7l8meptwyh" path="res://assets/items/items.png" id="2_fttkb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwm0u"]
-size = Vector2(8, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy8tx"]
 
 [node name="key" type="Area2D" groups=["itens"]]
 script = ExtResource("1_4lytf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0546875, 0.09375)
-texture = ExtResource("2_spc1i")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_hwm0u")
+scale = Vector2(0.6, 0.6)
+shape = SubResource("RectangleShape2D_wy8tx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fttkb")
+region_enabled = true
+region_rect = Rect2(2.8686743, 68.954285, 11.325166, 6.074707)
